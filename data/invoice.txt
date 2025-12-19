@@ -1,0 +1,14 @@
+invoice
+invoice number
+billing address
+seller
+buyer
+gst
+tax
+total amount
+subtotal
+amount due
+payment terms
+due date
+invoice date
+
