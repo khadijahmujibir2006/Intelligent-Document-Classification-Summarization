@@ -1,6 +1,16 @@
-dear sir
-dear madam
-meeting schedule
-attached file
-regards
-thank you
+From: hr@company.com
+To: applicant@gmail.com
+Subject: Interview Schedule Confirmation
+
+Dear Candidate,
+
+We are pleased to inform you that you have been shortlisted for the technical interview scheduled on Monday at 10:00 AM.
+
+Please confirm your availability by replying to this email.
+
+If you have any questions, feel free to contact us.
+
+Best Regards,
+HR Team
+ABC Corporation
+Phone: +91-9876543210

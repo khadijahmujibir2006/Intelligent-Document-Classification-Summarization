@@ -1,24 +1,36 @@
-resume
-curriculum vitae
-education
-degree
-bachelor of engineering
-computer science
-skills
-projects
-internship
-training
-certification
-achievements
-paper presentation
-hackathon
-technical skills
-programming languages
-machine learning
-python
-java
-c programming
-contact details
-email address
-phone number
-profile summary
+RESUME
+
+Name: John Doe
+Email: johndoe@gmail.com
+Phone: +91-9876543210
+LinkedIn: linkedin.com/in/johndoe
+GitHub: github.com/johndoe
+
+CAREER OBJECTIVE
+Motivated Computer Science graduate seeking an entry-level software engineering role to apply programming and problem-solving skills.
+
+EDUCATION
+Bachelor of Engineering in Computer Science
+Anna University, Chennai
+CGPA: 8.7
+
+TECHNICAL SKILLS
+Programming Languages: Python, Java, C++
+Web Technologies: HTML, CSS, JavaScript
+Databases: MySQL
+Tools: Git, VS Code
+
+PROJECTS
+• Intelligent Document Classification using NLP
+• Resume Screening System using Machine Learning
+
+INTERNSHIP
+Software Development Intern – ABC Technologies
+Worked on backend APIs and data preprocessing
+
+ACHIEVEMENTS
+• Solved 500+ problems on LeetCode
+• Winner – Paper Presentation (Anna University)
+
+DECLARATION
+I hereby declare that the information provided is true to the best of my knowledge.

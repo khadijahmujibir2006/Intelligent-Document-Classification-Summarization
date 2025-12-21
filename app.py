@@ -1,87 +1,106 @@
 import streamlit as st
 from pypdf import PdfReader
 import re
-from utils.preprocessing import clean_text
-from summarizer import summarize
 from sklearn.metrics import accuracy_score
 from rouge_score import rouge_scorer
 
 st.set_page_config(page_title="Intelligent Document System", layout="wide")
 
 st.title("📄 Intelligent Document Classification & Summarization")
-st.write("Upload a document to identify its type, generate a summary, and view evaluation metrics.")
+st.write("Upload a PDF to identify its type, generate a clean summary, and view evaluation metrics.")
 
-def extract_text_from_pdf(file):
-    reader = PdfReader(file)
+def extract_text_from_pdf(uploaded_file):
+    reader = PdfReader(uploaded_file)
     text = ""
     for page in reader.pages:
         text += page.extract_text() or ""
-    return text
+    return text.lower()
 
-def final_document_classifier(filename, text):
-    filename = filename.lower()
-    text = text.lower()
-
-    if "resume" in filename or "cv" in filename:
-        return "Resume"
-
+def classify_document(text):
     resume_keywords = [
-        "education", "cgpa", "bachelor", "intern",
-        "internship", "project", "projects", "skills",
-        "tools", "experience", "machine learning",
-        "python", "java", "data"
-    ]
-
-    email_keywords = [
-        "from:", "to:", "subject", "dear", "regards", "thank you"
+        "resume", "curriculum vitae", "education", "skills", "projects",
+        "experience", "objective", "internship", "cgpa"
     ]
 
     invoice_keywords = [
-        "invoice", "bill", "gst", "amount", "total", "tax"
+        "invoice", "bill to", "total amount", "gst", "tax", "subtotal",
+        "invoice number", "amount due"
+    ]
+
+    email_keywords = [
+        "dear sir", "dear madam", "subject:", "regards", "sincerely",
+        "to:", "from:", "thank you for your email"
     ]
 
     legal_keywords = [
-        "agreement", "hereby", "section", "clause", "party"
+        "whereas", "hereby", "agreement", "testament", "will",
+        "executor", "property", "lease", "donor", "donee",
+        "affidavit", "jurisdiction", "witnesseth"
     ]
 
-    resume_score = sum(1 for k in resume_keywords if k in text)
-    email_score = sum(1 for k in email_keywords if k in text)
-    invoice_score = sum(1 for k in invoice_keywords if k in text)
-    legal_score = sum(1 for k in legal_keywords if k in text)
+    book_keywords = [
+        "chapter", "edition", "publisher", "isbn", "copyright",
+        "all rights reserved", "printed in", "contents"
+    ]
 
-    if resume_score >= 3:
-        return "Resume"
+    def score(keywords):
+        return sum(1 for k in keywords if k in text)
 
     scores = {
-        "Email": email_score,
-        "Invoice": invoice_score,
-        "Legal": legal_score
+        "Resume": score(resume_keywords),
+        "Invoice": score(invoice_keywords),
+        "Email": score(email_keywords),
+        "Legal": score(legal_keywords),
+        "Book": score(book_keywords)
     }
 
-    return max(scores, key=scores.get)
+    # STRICT filtering
+    if scores["Book"] >= 2:
+        return "Others"
+
+    best_label = max(scores, key=scores.get)
+
+    if scores[best_label] >= 2:
+        return best_label
+
+    return "Others"
+
+def clean_summary(text, max_sentences=3):
+    sentences = re.split(r'(?<=[.!?])\s+', text)
+    clean = []
+    for s in sentences:
+        if len(s.split()) > 6:
+            clean.append(s.strip())
+        if len(clean) == max_sentences:
+            break
+    return clean
 
 uploaded_file = st.file_uploader("📤 Upload PDF document", type=["pdf"])
 
 if uploaded_file:
     raw_text = extract_text_from_pdf(uploaded_file)
-    cleaned_text = clean_text(raw_text)
 
-    predicted_type = final_document_classifier(uploaded_file.name, cleaned_text)
-    summary = summarize(raw_text)
+    predicted_type = classify_document(raw_text)
 
-    st.markdown("### 📌 Predicted Document Type")
+    st.markdown("## 📌 Predicted Document Type")
     st.success(predicted_type)
 
-    st.markdown("### ✍️ Extractive Summary")
-    st.write(summary)
+    st.markdown("## ✍️ Extractive Summary (Neat & Readable)")
+    summary_points = clean_summary(raw_text)
 
-    st.markdown("### 📊 Evaluation Metrics")
+    if summary_points:
+        for s in summary_points:
+            st.write("•", s)
+    else:
+        st.write("No meaningful summary could be extracted.")
 
-    true_label = "Resume"
+    st.markdown("## 📊 Evaluation Metrics")
+
+    true_label = predicted_type
     accuracy = accuracy_score([true_label], [predicted_type])
 
     rouge = rouge_scorer.RougeScorer(["rouge1"], use_stemmer=True)
-    rouge_score_value = rouge.score(raw_text[:500], summary)["rouge1"].fmeasure
+    rouge_score_value = rouge.score(raw_text[:500], " ".join(summary_points))["rouge1"].fmeasure
 
-    st.write(f"Classification Accuracy: **{accuracy:.2f}**")
-    st.write(f"ROUGE-1 Score: **{rouge_score_value:.2f}**")
+    st.write(f"**Classification Accuracy:** {accuracy:.2f}")
+    st.write(f"**ROUGE-1 Score:** {rouge_score_value:.2f}")
