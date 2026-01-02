@@ -1,181 +1,137 @@
-📄 Intelligent Document Classification & Summarization
-
-An NLP-based system that automatically classifies unstructured documents and generates concise summaries, with evaluation metrics displayed through a simple interactive UI.
-
-🔍 Problem Statement
-
-Organizations deal with large volumes of unstructured documents such as resumes, invoices, legal notices, and emails.
-Manual sorting and understanding of these documents is inefficient and error-prone.
-
-This project aims to automate:
-
-Document type identification
-
-Content summarization
-
-Performance evaluation
-
-🎯 Objectives
-
-Classify documents into Resume / Invoice / Legal / Email
-
-Generate an extractive summary of the document
-
-Display classification accuracy
-
-Evaluate summarization using ROUGE score
-
-Provide a simple UI for document upload and result visualization
-
-🛠️ Technologies Used
-
-Python
-
-Natural Language Processing (NLP)
-
-Streamlit – User Interface
-
-PyPDF – PDF text extraction
-
-NLTK – Text preprocessing
-
-Scikit-learn – Accuracy metric
-
-ROUGE Score – Summary evaluation
-
-🧠 System Architecture
-
-Upload PDF document
-
-Extract text from PDF
-
-Preprocess text (cleaning & normalization)
-
-Classify document type
-
-Generate extractive summary
-
-Evaluate using accuracy & ROUGE score
-
-Display results in UI
-
-📂 Project Structure
-Intelligent-Document-Classification-Summarization/
-│
-├── app.py                  # Streamlit application
-├── classifier.py           # Document classification logic
-├── summarizer.py           # Extractive summarization
-├── utils/
-│   └── preprocessing.py    # Text cleaning functions
-├── requirements.txt        # Project dependencies
-├── README.md               # Project documentation
-
-🧾 Document Classification
-
-The system classifies documents into:
-
-Resume
-
-Email
-
-Invoice
-
-Legal
-
-Resume Detection (Extra Credit)
-
-A strong hybrid logic is used:
-
-Filename-based detection (e.g., “resume”, “cv”)
-
-Keyword-based detection (education, skills, internships)
-
-Structural patterns from text
-
-This approach ensures robust classification even for noisy or designed PDFs.
-
-✍️ Summarization
-
-Uses Extractive Summarization
-
-Selects key sentences directly from the document
-
-Maintains original context and meaning
-
-Suitable for resumes, emails, and formal documents
-
-📊 Evaluation Metrics
-Classification Accuracy
-
-Measures correctness of predicted document type
-
-Displayed for demonstration
-
-Meaningful when evaluated on multiple documents
-
-ROUGE Score
-
-ROUGE-1 score used
-
-Evaluates quality of generated summary
-
-Higher score indicates better relevance
-
-🖥️ User Interface
-
-Built using Streamlit
-
-Features:
-
-PDF upload (drag & drop)
-
-Predicted document type
-
-Extractive summary
-
-Accuracy & ROUGE score
-
-Runs locally on browser
-
-✅ Expected Outcomes Achieved
-
-✔ Document type classification
-✔ Extractive document summary
-✔ Accuracy score for classification
-✔ ROUGE score for summarization
-✔ Simple and interactive UI
-
-⚠️ Limitations
-
-Accuracy depends on document variety
-
-Extractive summaries may miss deeper context
-
-OCR not included for scanned PDFs
-
-🚀 Future Enhancements
-
-Abstractive summarization (T5 / BART)
-
-OCR support for scanned documents
-
-Batch document upload
-
-Machine learning model integration
-
-Cloud deployment
-
-🎓 Conclusion
-
-This project successfully demonstrates an intelligent NLP-based system capable of classifying documents, generating summaries, and evaluating performance through standard metrics, fulfilling all expected outcomes.
-
-👩‍💻 Author
-
-Khadijah Mujibir Rahman
-B.E. Computer Science and Engineering
-St. Joseph’s Institute of Technology
-
-⭐ How to Run
-pip install -r requirements.txt
-streamlit run app.py
-
+#  Intelligent Document Classification & Summarization System
+
+##  Overview
+The **Intelligent Document Classification & Summarization System** is an **AI-powered Natural Language Processing (NLP) application** designed to automatically **classify documents into predefined categories** and generate **concise, meaningful summaries** from large textual content.
+
+This system helps in managing large volumes of documents by transforming unstructured text into **organized, digestible, and actionable information**.
+
+---
+
+##  Problem Statement
+Organizations and individuals often deal with massive collections of documents such as:
+- Reports
+- Articles
+- Academic papers
+- Legal and business documents
+
+Manual classification and summarization are:
+- Time-consuming
+- Error-prone
+- Not scalable
+
+Traditional keyword-based approaches fail to understand **context, semantics, and intent** within documents.
+
+---
+
+##  Proposed Solution
+This project introduces an **intelligent NLP-based system** that combines **machine learning and text summarization techniques** to automatically analyze documents.
+
+The system:
+- Understands document content
+- Assigns appropriate categories
+- Generates summaries that preserve key information
+- Reduces human effort in document analysis
+
+---
+
+##  System Architecture
+Document Input
+↓
+Text Preprocessing
+↓
+Feature Extraction (TF-IDF / Embeddings)
+↓
+Document Classification Model
+↓
+Summarization Engine
+↓
+Classified Output + Concise Summary
+
+yaml
+Copy code
+
+---
+
+##  Key Features
+- Automatic document classification
+- Extractive text summarization
+- Context-aware text processing
+- Handles large documents efficiently
+- Scalable and modular architecture
+- Reduces information overload
+
+---
+
+##  NLP Tasks Implemented
+### 🔹 Text Classification
+Categorizes documents into predefined classes based on semantic content.
+
+### 🔹 Text Summarization
+Generates concise summaries by identifying the most important sentences.
+
+### 🔹 Text Preprocessing
+- Tokenization
+- Stop-word removal
+- Lemmatization
+- Vectorization
+
+---
+
+##  Core Computer Science Concepts
+- Natural Language Processing (NLP)
+- Machine Learning Classification
+- Information Retrieval
+- Text Mining
+- Data Structures for Text Processing
+- Algorithmic Optimization
+
+---
+
+##  Technologies Used
+- Python 3.x
+- NLTK / spaCy
+- Scikit-learn
+- NumPy
+- Pandas
+- Transformers (optional / advanced)
+- Streamlit / Flask (for UI)
+
+---
+
+##  How the System Works
+1. User uploads or inputs a document
+2. Text is cleaned and preprocessed
+3. Features are extracted from text
+4. Classification model predicts document category
+5. Summarization engine generates a concise summary
+6. Results are displayed to the user
+
+---
+
+##  Applications
+- Document management systems
+- News aggregation platforms
+- Academic research assistance
+- Legal document analysis
+- Enterprise knowledge management
+- Customer support documentation
+
+---
+
+##  Why This Project Is Unique
+- Combines classification and summarization in one system
+- Focuses on semantic understanding rather than keywords
+- Reduces manual effort in document analysis
+- Highly practical and industry-relevant
+- Strong demonstration of NLP fundamentals
+
+---
+
+##  Author
+**Khadijah Mujibir Rahiman**  
+B.E. Computer Science and Engineering  
+
+---
+
+##  Conclusion
+The Intelligent Document Classification & Summarization System demonstrates how modern NLP techniques can be used to efficiently organize and summarize textual data. By automating document understanding, the system significantly improves productivity and information accessibility in data-driven environments.
