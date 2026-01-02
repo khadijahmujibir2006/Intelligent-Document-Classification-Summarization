@@ -178,3 +178,4 @@ St. Joseph’s Institute of Technology
 ⭐ How to Run
 pip install -r requirements.txt
 streamlit run app.py
+
